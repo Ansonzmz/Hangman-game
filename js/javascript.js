@@ -7,9 +7,9 @@ const finalMessage = document.getElementById('final-message');
 // The figure part turns to an array now, will be iterated later when wrong letter keyed.
 const figureParts = document.querySelectorAll('.figure-part');
 
-const getTips = document.getElementById('tips'); // **
+const getTips = document.getElementById('tips'); // 
 
-// Hardcode some words here for guess ....
+// Hardcode some words here for guess .... really not a good way, shall I use hash map at least ...
 const words = ['application', 'programming', 'interface', 'wizard', 'python', 'canada'];
 const tips = [
     'Something to apply and run',
@@ -20,17 +20,15 @@ const tips = [
     'The country we live in'
 ];
 
-// ** randomly pick the word from array
-// ** let selectedWord = words[Math.floor(Math.random() * words.length)]
+//
 
-//**
+// randomly pick the word from array
 let indexWordTips = Math.floor(Math.random() * words.length);
 let selectedWord = words[indexWordTips];
 let selectedTips = tips[indexWordTips];
 
 getTips.innerHTML = selectedTips;
 //**
-
 
 
 // console.log(selectedWord);
@@ -61,8 +59,8 @@ function displayWord() {
 //update the wrong letters
 function updateWrongLetterEl() {
     // console.log('update wrong');
-    // I think: if we need to include tag without arguments, then use ''; else use `` as below
-    // Display wrong letters on right side. (Why there is an ',' between each displayed letters?)
+    // If we need to include tag without arguments, then use ''; else use `` as below
+    // Display wrong letters on right side. (Why there is an ',' between each displayed letters? ...)
     wrongLetterEl.innerHTML = `
         ${wrongLetters.length > 0 ? '<p>Wrong try</p>' : ''}
         ${wrongLetters.map(letter => `<span>${letter}</span>`)}
@@ -94,7 +92,8 @@ function showNotificaiton() {
     }, 2000)
 }
 
-//keydown letter press
+// keydown letter press
+// need to set up other non-letter keys blocked ...
 window.addEventListener('keydown', e => {
     if((e.key >= 'a' && e.key <= 'z') || (e.key >= 'A' && e.key <= 'Z')) {
         const letter = e.key;
@@ -124,13 +123,11 @@ playAgainBtn.addEventListener('click', () => {
     correctLetters.splice(0);
     wrongLetters.splice(0);
 
-
-    //** selectedWord = words[Math.floor(Math.random() * words.length)];
-
+    // reselect the word and tips
     indexWordTips = Math.floor(Math.random() * words.length)
     selectedWord = words[indexWordTips];
     selectedTips = tips[indexWordTips];
-    
+
     getTips.innerHTML = selectedTips;
 
 
